@@ -13,6 +13,11 @@
     -fx-font-weight: bold;
 }
 
+.app-version {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 11px;
+}
+
 .main-content {
     -fx-background-color: -color-bg-default;
 }

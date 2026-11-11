@@ -7,4 +7,8 @@ public class ToolsService {
     public String pageTitle() {
         return "Tools";
     }
+
+    public String description() {
+        return "Your tools will appear here.";
+    }
 }

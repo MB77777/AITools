@@ -12,6 +12,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 public class DesktopApplication extends Application {
+    private static final String APPLICATION_VERSION = "0.0.11";
     private ConfigurableApplicationContext context;
 
     @Override
@@ -30,7 +31,7 @@ public class DesktopApplication extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root, 1000, 650);
         scene.getStylesheets().add(getClass().getResource("/css/app.css").toExternalForm());
-        stage.setTitle("AITools");
+        stage.setTitle("AI Tool (" + APPLICATION_VERSION + ")");
         stage.setMinWidth(760);
         stage.setMinHeight(520);
         stage.setScene(scene);

@@ -7,4 +7,8 @@ public class SettingsService {
     public String pageTitle() {
         return "Settings";
     }
+
+    public String description() {
+        return "Application settings will appear here.";
+    }
 }
