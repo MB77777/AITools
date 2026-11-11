@@ -1,0 +1,8 @@
+- crate seperate controller for each dashboard
+- FileTool improvments
+  - Add at the top of this form Summary pane/Box for statistics. It should have some information about current/selected folder.
+    - name and path, files numbers, folders number
+  - Add View that shows sortable list of files in the selected directory (vertical list with names, dates, sizes)
+  - All view logic should be in the FileToolController
+  - All logic should be in the FileToolService
+- Under the AI Tool banner (format: Version: A.B.C) and in the title bar (format: AI Tool (A.B.C))add version number. 

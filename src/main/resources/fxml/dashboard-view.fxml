@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox spacing="22" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+    <padding><Insets bottom="30" left="30" right="30" top="30" /></padding>
+    <HBox spacing="16">
+        <VBox spacing="8" styleClass="metric-card" HBox.hgrow="ALWAYS">
+            <Label text="Tools" />
+            <Label styleClass="metric-value" text="3" />
+        </VBox>
+        <VBox spacing="8" styleClass="metric-card" HBox.hgrow="ALWAYS">
+            <Label text="Status" />
+            <Label styleClass="metric-value" text="Ready" />
+        </VBox>
+    </HBox>
+    <VBox spacing="12" styleClass="metric-card">
+        <Label styleClass="section-title" text="Main panel" />
+        <Label text="Welcome to AITools! This is a sample JavaFX and Spring Boot dashboard." wrapText="true" />
+        <LineChart animated="false" title="Sample data" VBox.vgrow="ALWAYS">
+            <xAxis><CategoryAxis label="Month" /></xAxis>
+            <yAxis><NumberAxis label="Value" /></yAxis>
+        </LineChart>
+    </VBox>
+</VBox>
