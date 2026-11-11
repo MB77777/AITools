@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane styleClass="app-root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26" fx:controller="eu.pp.aitools.controller.DashboardController">
+<BorderPane styleClass="app-root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="eu.pp.aitools.controller.DashboardController">
     <left>
         <VBox prefWidth="210" spacing="12" styleClass="sidebar">
             <padding><Insets bottom="16" left="16" right="16" top="24" /></padding>

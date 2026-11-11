@@ -40,5 +40,5 @@ Spring Boot, Java, Java FX, Maven, PostgreSQL - check versions in pom.xml.
 - you can not run any system command or tool without asking
 - never run mvn clean package - i will do it myself to spare tokens
 - never commit anything
-- stop working and ask question if there are uncommited changes in the repository
+- stop working and ask question if there are uncommited changes in the repository. The only uncommited changes can be in the prompts directory as new prompts appear
 - always increase project version in pom.xml.

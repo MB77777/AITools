@@ -1,0 +1,3 @@
+- Add a button called FileTool.
+- Change all the labels to English (Settings, Tools etc)
+- Prepare clear view for the File Tool
