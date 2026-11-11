@@ -1,0 +1,41 @@
+.app-root {
+    -fx-font-family: "System";
+}
+
+.sidebar {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 1 0 0;
+}
+
+.brand {
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+}
+
+.main-content {
+    -fx-background-color: -color-bg-default;
+}
+
+.page-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.metric-card {
+    -fx-background-color: -color-bg-subtle;
+    -fx-background-radius: 12;
+    -fx-padding: 20;
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 12;
+}
+
+.metric-value {
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+}
+
+.section-title {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}

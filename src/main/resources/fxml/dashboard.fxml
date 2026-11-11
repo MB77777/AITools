@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="eu.pp.controller.DashboardController" styleClass="app-root">
+    <left>
+        <VBox spacing="12" prefWidth="210" styleClass="sidebar">
+            <padding><Insets top="24" right="16" bottom="16" left="16"/></padding>
+            <Label text="AITools" styleClass="brand"/>
+            <Separator/>
+            <Button text="Dashboard" onAction="#showDashboard" maxWidth="Infinity"/>
+            <Button text="Narzędzia" onAction="#showTools" maxWidth="Infinity"/>
+            <Button text="Ustawienia" onAction="#showSettings" maxWidth="Infinity"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <ToggleButton fx:id="themeToggle" text="Ciemny motyw" onAction="#toggleTheme" maxWidth="Infinity"/>
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="22" styleClass="main-content">
+            <padding><Insets top="30" right="30" bottom="30" left="30"/></padding>
+            <Label fx:id="headingLabel" styleClass="page-title"/>
+            <HBox spacing="16">
+                <VBox spacing="8" styleClass="metric-card" HBox.hgrow="ALWAYS">
+                    <Label text="Narzędzia"/>
+                    <Label text="3" styleClass="metric-value"/>
+                </VBox>
+                <VBox spacing="8" styleClass="metric-card" HBox.hgrow="ALWAYS">
+                    <Label text="Status"/>
+                    <Label text="Gotowy" styleClass="metric-value"/>
+                </VBox>
+            </HBox>
+            <VBox spacing="12" styleClass="metric-card">
+                <Label text="Panel główny" styleClass="section-title"/>
+                <Label fx:id="contentLabel" wrapText="true"/>
+                <LineChart title="Przykładowe dane" animated="false" VBox.vgrow="ALWAYS">
+                    <xAxis><CategoryAxis label="Miesiąc"/></xAxis>
+                    <yAxis><NumberAxis label="Wartość"/></yAxis>
+                </LineChart>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

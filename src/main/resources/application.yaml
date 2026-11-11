@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: AITools
+  main:
+    web-application-type: none
+    banner-mode: 'off'
+
+aitools:
+  welcome-message: 'Dashboard AITools'
+
+logging:
+  level:
+    root: INFO
+    eu.pp: DEBUG
