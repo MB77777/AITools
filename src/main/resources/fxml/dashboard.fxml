@@ -7,58 +7,87 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane styleClass="app-root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="eu.pp.aitools.controller.DashboardController">
+<BorderPane styleClass="app-root" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.pp.aitools.controller.DashboardController">
     <left>
         <VBox prefWidth="210" spacing="12" styleClass="sidebar">
             <padding><Insets bottom="16" left="16" right="16" top="24" /></padding>
             <Label styleClass="brand" text="AITools" />
             <Separator />
             <Button maxWidth="Infinity" onAction="#showDashboard" text="Dashboard" />
-            <Button maxWidth="Infinity" onAction="#showTools" text="Narzędzia" />
-            <Button maxWidth="Infinity" onAction="#showSettings" text="Ustawienia" />
+            <Button maxWidth="Infinity" onAction="#showTools" text="Tools" />
+            <Button maxWidth="Infinity" onAction="#showFileTool" text="File Tool" />
+            <Button maxWidth="Infinity" onAction="#showSettings" text="Settings" />
             <Region VBox.vgrow="ALWAYS" />
-            <ToggleButton fx:id="themeToggle" maxWidth="Infinity" onAction="#toggleTheme" text="Ciemny motyw" />
+            <ToggleButton fx:id="themeToggle" maxWidth="Infinity" onAction="#toggleTheme" text="Dark theme" />
         </VBox>
     </left>
     <center>
-        <VBox spacing="22" styleClass="main-content">
+        <StackPane styleClass="main-content">
+          <VBox fx:id="dashboardView" spacing="22">
             <padding><Insets bottom="30" left="30" right="30" top="30" /></padding>
-         <HBox alignment="CENTER_RIGHT" prefHeight="80.0" prefWidth="500.0">
+         <HBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0">
             <children>
-               <ImageView fitHeight="85.0" fitWidth="98.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../image/robot_icon.png" />
-                  </image>
-               </ImageView>
+                  <VBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="251.0">
+                     <children>
+                          <Label styleClass="page-title" text="Tools" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_RIGHT" prefHeight="85.0" prefWidth="265.0">
+                     <children>
+                     <ImageView fitHeight="85.0" fitWidth="177.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../image/robot_icon.png" />
+                        </image>
+                     </ImageView>
+                     </children>
+                  </VBox>
             </children>
          </HBox>
             <Label fx:id="headingLabel" styleClass="page-title" />
             <HBox spacing="16">
                 <VBox spacing="8" styleClass="metric-card" HBox.hgrow="ALWAYS">
-                    <Label text="Narzędzia" />
                     <Label styleClass="metric-value" text="3" />
                 </VBox>
                 <VBox spacing="8" styleClass="metric-card" HBox.hgrow="ALWAYS">
                     <Label text="Status" />
-                    <Label styleClass="metric-value" text="Gotowy" />
+                    <Label styleClass="metric-value" text="Ready" />
                 </VBox>
             </HBox>
             <VBox spacing="12" styleClass="metric-card">
-                <Label styleClass="section-title" text="Panel główny" />
-                <Label fx:id="contentLabel" wrapText="true" />
-                <LineChart animated="false" title="Przykładowe dane" VBox.vgrow="ALWAYS">
-                    <xAxis><CategoryAxis label="Miesiąc" /></xAxis>
-                    <yAxis><NumberAxis label="Wartość" /></yAxis>
+                <Label styleClass="section-title" text="Main panel" />
+                <Label fx:id="contentLabel" text="Welcome to AITools!" wrapText="true" />
+                <LineChart animated="false" title="Sample data" VBox.vgrow="ALWAYS">
+                    <xAxis><CategoryAxis label="Month" /></xAxis>
+                    <yAxis><NumberAxis label="Value" /></yAxis>
                 </LineChart>
             </VBox>
-        </VBox>
+          </VBox>
+          <VBox fx:id="fileToolView" managed="false" spacing="18" visible="false">
+            <padding><Insets bottom="30" left="30" right="30" top="30" /></padding>
+            <Label styleClass="page-title" text="File Tool" />
+            <VBox spacing="10" styleClass="metric-card">
+              <Label styleClass="section-title" text="File workspace" />
+              <Label text="Select a file to inspect or process it with the available actions." wrapText="true" />
+              <HBox spacing="10">
+                <TextField promptText="Choose a file..." HBox.hgrow="ALWAYS" />
+                <Button text="Browse" />
+              </HBox>
+              <HBox spacing="10">
+                <Button text="Inspect file" />
+                <Button text="Process file" />
+              </HBox>
+            </VBox>
+          </VBox>
+        </StackPane>
     </center>
 </BorderPane>

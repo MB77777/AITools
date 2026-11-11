@@ -5,6 +5,7 @@ import eu.pp.aitools.service.DashboardService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.VBox;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +15,8 @@ public class DashboardController {
     @FXML private Label headingLabel;
     @FXML private Label contentLabel;
     @FXML private ToggleButton themeToggle;
+    @FXML private VBox dashboardView;
+    @FXML private VBox fileToolView;
 
     public DashboardController(DashboardService dashboardService) {
         this.dashboardService = dashboardService;
@@ -27,22 +30,41 @@ public class DashboardController {
 
     @FXML
     private void showDashboard() {
-        contentLabel.setText("Witaj w AITools! To przykładowy dashboard JavaFX + Spring Boot.");
+        setActiveView(dashboardView);
+        headingLabel.setText("AITools Dashboard");
+        contentLabel.setText("Welcome to AITools! This is a sample JavaFX and Spring Boot dashboard.");
     }
 
     @FXML
     private void showTools() {
-        contentLabel.setText("Tutaj pojawią się Twoje narzędzia.");
+        setActiveView(dashboardView);
+        headingLabel.setText("Tools");
+        contentLabel.setText("Your tools will appear here.");
     }
 
     @FXML
     private void showSettings() {
-        contentLabel.setText("Tutaj pojawią się ustawienia aplikacji.");
+        setActiveView(dashboardView);
+        headingLabel.setText("Settings");
+        contentLabel.setText("Application settings will appear here.");
+    }
+
+    @FXML
+    private void showFileTool() {
+        setActiveView(fileToolView);
+        headingLabel.setText("File Tool");
     }
 
     @FXML
     private void toggleTheme() {
         DesktopApplication.setDarkTheme(themeToggle.isSelected());
-        themeToggle.setText(themeToggle.isSelected() ? "Jasny motyw" : "Ciemny motyw");
+        themeToggle.setText(themeToggle.isSelected() ? "Light theme" : "Dark theme");
+    }
+
+    private void setActiveView(VBox activeView) {
+        dashboardView.setVisible(activeView == dashboardView);
+        dashboardView.setManaged(activeView == dashboardView);
+        fileToolView.setVisible(activeView == fileToolView);
+        fileToolView.setManaged(activeView == fileToolView);
     }
 }
