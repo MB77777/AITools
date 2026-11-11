@@ -14,4 +14,8 @@ public class DashboardService {
     public String welcomeMessage() {
         return properties.welcomeMessage();
     }
+
+    public String pageTitle() {
+        return "AITools Dashboard";
+    }
 }

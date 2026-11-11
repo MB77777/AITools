@@ -2,6 +2,9 @@ package eu.pp.aitools.controller;
 
 import eu.pp.aitools.DesktopApplication;
 import eu.pp.aitools.service.DashboardService;
+import eu.pp.aitools.service.FileToolService;
+import eu.pp.aitools.service.SettingsService;
+import eu.pp.aitools.service.ToolsService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -11,48 +14,55 @@ import org.springframework.stereotype.Component;
 @Component
 public class DashboardController {
     private final DashboardService dashboardService;
+    private final ToolsService toolsService;
+    private final FileToolService fileToolService;
+    private final SettingsService settingsService;
 
     @FXML private Label headingLabel;
-    @FXML private Label contentLabel;
     @FXML private ToggleButton themeToggle;
     @FXML private VBox dashboardView;
+    @FXML private VBox toolsView;
     @FXML private VBox fileToolView;
+    @FXML private VBox settingsView;
 
-    public DashboardController(DashboardService dashboardService) {
+    public DashboardController(
+            DashboardService dashboardService,
+            ToolsService toolsService,
+            FileToolService fileToolService,
+            SettingsService settingsService) {
         this.dashboardService = dashboardService;
+        this.toolsService = toolsService;
+        this.fileToolService = fileToolService;
+        this.settingsService = settingsService;
     }
 
     @FXML
     private void initialize() {
-        headingLabel.setText(dashboardService.welcomeMessage());
         showDashboard();
     }
 
     @FXML
     private void showDashboard() {
         setActiveView(dashboardView);
-        headingLabel.setText("AITools Dashboard");
-        contentLabel.setText("Welcome to AITools! This is a sample JavaFX and Spring Boot dashboard.");
+        headingLabel.setText(dashboardService.pageTitle());
     }
 
     @FXML
     private void showTools() {
-        setActiveView(dashboardView);
-        headingLabel.setText("Tools");
-        contentLabel.setText("Your tools will appear here.");
+        setActiveView(toolsView);
+        headingLabel.setText(toolsService.pageTitle());
     }
 
     @FXML
     private void showSettings() {
-        setActiveView(dashboardView);
-        headingLabel.setText("Settings");
-        contentLabel.setText("Application settings will appear here.");
+        setActiveView(settingsView);
+        headingLabel.setText(settingsService.pageTitle());
     }
 
     @FXML
     private void showFileTool() {
         setActiveView(fileToolView);
-        headingLabel.setText("File Tool");
+        headingLabel.setText(fileToolService.pageTitle());
     }
 
     @FXML
@@ -62,9 +72,14 @@ public class DashboardController {
     }
 
     private void setActiveView(VBox activeView) {
-        dashboardView.setVisible(activeView == dashboardView);
-        dashboardView.setManaged(activeView == dashboardView);
-        fileToolView.setVisible(activeView == fileToolView);
-        fileToolView.setManaged(activeView == fileToolView);
+        setViewState(dashboardView, activeView == dashboardView);
+        setViewState(toolsView, activeView == toolsView);
+        setViewState(fileToolView, activeView == fileToolView);
+        setViewState(settingsView, activeView == settingsView);
+    }
+
+    private void setViewState(VBox view, boolean active) {
+        view.setVisible(active);
+        view.setManaged(active);
     }
 }

@@ -17,6 +17,10 @@
     -fx-background-color: -color-bg-default;
 }
 
+.content-panel {
+    -fx-background-color: -color-bg-default;
+}
+
 .page-title {
     -fx-font-size: 28px;
     -fx-font-weight: bold;
