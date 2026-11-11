@@ -4,20 +4,20 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>eu.pp</groupId>
     <artifactId>AITools</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>AITools</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.7</version>
+        <version>4.1.2</version>
         <relativePath/>
     </parent>
     <properties>
         <java.version>25</java.version>
-        <javafx.version>25</javafx.version>
+        <javafx.version>25.0.5</javafx.version>
         <atlantafx.version>2.1.0</atlantafx.version>
-        <controlsfx.version>11.2.2</controlsfx.version>
+        <controlsfx.version>11.2.6</controlsfx.version>
     </properties>
     <dependencies>
         <dependency>
@@ -26,7 +26,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
+            <artifactId>spring-boot-starter-aspectj</artifactId>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
