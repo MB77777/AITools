@@ -1,6 +1,6 @@
-package eu.pp.service;
+package eu.pp.aitools.service;
 
-import eu.pp.config.AppProperties;
+import eu.pp.aitools.config.AppProperties;
 import org.springframework.stereotype.Service;
 
 @Service

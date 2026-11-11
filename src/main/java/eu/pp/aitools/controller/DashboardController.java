@@ -1,7 +1,7 @@
-package eu.pp.controller;
+package eu.pp.aitools.controller;
 
-import eu.pp.DesktopApplication;
-import eu.pp.service.DashboardService;
+import eu.pp.aitools.DesktopApplication;
+import eu.pp.aitools.service.DashboardService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;

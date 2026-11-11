@@ -1,4 +1,4 @@
-package eu.pp;
+package eu.pp.aitools;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -1,0 +1,1 @@
+Analyze project and get familiar with environment.

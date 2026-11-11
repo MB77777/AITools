@@ -1,4 +1,4 @@
-package eu.pp.config;
+package eu.pp.aitools.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
