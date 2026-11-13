@@ -52,3 +52,7 @@
 .tool-tile {
     -fx-padding: 16;
 }
+
+.selected-path {
+    -fx-font-weight: bold;
+}

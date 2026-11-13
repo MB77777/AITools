@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <VBox spacing="14" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.pp.aitools.controller.FileToolController">
@@ -13,7 +14,6 @@
     <VBox spacing="10" styleClass="metric-card">
         <HBox alignment="CENTER_LEFT" spacing="12">
             <Label styleClass="section-title" text="Folder summary" />
-            <Button mnemonicParsing="false" onAction="#browseFolder" text="Select folder" />
         </HBox>
         <HBox spacing="24">
             <VBox spacing="3" HBox.hgrow="ALWAYS">
@@ -29,7 +29,11 @@
                 <Label fx:id="foldersCountLabel" styleClass="metric-value" text="0" />
             </VBox>
         </HBox>
-        <Label fx:id="folderPathLabel" text="-" wrapText="true" />
+        <HBox alignment="CENTER_LEFT" spacing="8">
+            <Label text="Folder" />
+            <Label fx:id="folderPathLabel" styleClass="selected-path" text="-" wrapText="true" HBox.hgrow="ALWAYS" />
+            <Button fx:id="selectFolderButton" mnemonicParsing="false" onAction="#browseFolder" text="Select" />
+        </HBox>
         <HBox alignment="CENTER_LEFT" spacing="8">
             <Label text="Rules (.md)" />
             <TextField fx:id="rulesFileField" editable="false" promptText="Select a Markdown rules file" HBox.hgrow="ALWAYS" />
@@ -40,6 +44,10 @@
             <Label text="Output folder" />
             <TextField fx:id="outputFolderField" editable="false" HBox.hgrow="ALWAYS" />
             <Button fx:id="outputFolderButton" mnemonicParsing="false" onAction="#browseOutputFolder" text="Browse" />
+        </HBox>
+        <HBox alignment="CENTER_LEFT" spacing="8">
+            <Button fx:id="goButton" mnemonicParsing="false" onAction="#go" prefWidth="100" text="Go" />
+            <ToggleButton fx:id="originalCleanedButton" mnemonicParsing="false" onAction="#toggleOriginalCleaned" prefWidth="100" text="Original" visible="false" managed="false" />
         </HBox>
     </VBox>
     <Label fx:id="statusLabel" text="Select a folder to view its contents" />

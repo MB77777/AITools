@@ -31,7 +31,6 @@ public class FileToolService {
             long filesCount = children.stream().filter(Files::isRegularFile).count();
             long foldersCount = children.stream().filter(Files::isDirectory).count();
             List<FileEntry> files = children.stream()
-                    .filter(Files::isRegularFile)
                     .map(this::toFileEntry)
                     .toList();
 
@@ -51,7 +50,7 @@ public class FileToolService {
             BasicFileAttributes attributes = Files.readAttributes(file, BasicFileAttributes.class);
             LocalDateTime modifiedAt = LocalDateTime.ofInstant(
                     attributes.lastModifiedTime().toInstant(), ZoneId.systemDefault());
-            return new FileEntry(file.getFileName().toString(), modifiedAt, attributes.size());
+            return new FileEntry(file.getFileName().toString(), modifiedAt, attributes.size(), attributes.isDirectory());
         } catch (IOException exception) {
             throw new IllegalStateException("Unable to read file metadata.", exception);
         }

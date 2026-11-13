@@ -12,6 +12,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.FileChooser;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
@@ -32,6 +33,9 @@ public class FileToolController {
     @FXML private Label filesCountLabel;
     @FXML private Label foldersCountLabel;
     @FXML private Label statusLabel;
+    @FXML private Button selectFolderButton;
+    @FXML private Button goButton;
+    @FXML private ToggleButton originalCleanedButton;
     @FXML private TextField rulesFileField;
     @FXML private CheckBox makeCopyCheckBox;
     @FXML private TextField outputFolderField;
@@ -41,13 +45,17 @@ public class FileToolController {
     @FXML private TableColumn<FileEntry, String> modifiedColumn;
     @FXML private TableColumn<FileEntry, Number> sizeColumn;
 
+    private Path selectedDirectory;
+    private DirectorySnapshot originalSnapshot;
+
     public FileToolController(FileToolService fileToolService) {
         this.fileToolService = fileToolService;
     }
 
     @FXML
     private void initialize() {
-        nameColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(cell.getValue().name()));
+        nameColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(
+                cell.getValue().directory() ? cell.getValue().name() + "/" : cell.getValue().name()));
         modifiedColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(
                 cell.getValue().modifiedAt().format(DATE_FORMAT)));
         sizeColumn.setCellValueFactory(cell -> new ReadOnlyLongWrapper(cell.getValue().size()));
@@ -70,6 +78,9 @@ public class FileToolController {
     @FXML
     private void toggleMakeCopy() {
         updateOutputFolderVisibility();
+        if (!makeCopyCheckBox.isSelected()) {
+            showOriginalDirectory();
+        }
     }
 
     @FXML
@@ -88,6 +99,8 @@ public class FileToolController {
         outputFolderField.setManaged(visible);
         outputFolderButton.setVisible(visible);
         outputFolderButton.setManaged(visible);
+        originalCleanedButton.setVisible(visible);
+        originalCleanedButton.setManaged(visible);
     }
 
     @FXML
@@ -101,18 +114,68 @@ public class FileToolController {
         }
     }
 
+    @FXML
+    private void go() {
+        if (selectedDirectory == null) {
+            statusLabel.setText("Select a folder before starting.");
+        } else if (rulesFileField.getText().isBlank()) {
+            statusLabel.setText("Select a Markdown rules file before starting.");
+        } else {
+            statusLabel.setText("Ready to process the selected folder.");
+        }
+    }
+
+    @FXML
+    private void toggleOriginalCleaned() {
+        if (originalCleanedButton.isSelected()) {
+            showCleanedDirectory();
+        } else {
+            showOriginalDirectory();
+        }
+    }
+
     private void loadDirectory(Path directory) {
         try {
             DirectorySnapshot snapshot = fileToolService.inspectDirectory(directory);
+            selectedDirectory = directory.toAbsolutePath().normalize();
+            originalSnapshot = snapshot;
+            originalCleanedButton.setSelected(false);
+            originalCleanedButton.setText("Original");
+            selectFolderButton.setText("Change");
+            goButton.setDisable(false);
+            showSnapshot(snapshot, "Folder loaded");
+        } catch (RuntimeException exception) {
+            statusLabel.setText(exception.getMessage());
+        }
+    }
+
+    private void showOriginalDirectory() {
+        if (originalSnapshot != null) {
+            originalCleanedButton.setText("Original");
+            showSnapshot(originalSnapshot, "Original folder loaded");
+        }
+    }
+
+    private void showCleanedDirectory() {
+        try {
+            Path outputDirectory = Paths.get(outputFolderField.getText());
+            DirectorySnapshot cleanedSnapshot = fileToolService.inspectDirectory(outputDirectory);
+            originalCleanedButton.setText("Cleaned");
+            showSnapshot(cleanedSnapshot, "Cleaned folder loaded");
+        } catch (RuntimeException exception) {
+            originalCleanedButton.setSelected(false);
+            originalCleanedButton.setText("Original");
+            statusLabel.setText("Cleaned folder is not available: " + exception.getMessage());
+        }
+    }
+
+    private void showSnapshot(DirectorySnapshot snapshot, String status) {
             folderNameLabel.setText(snapshot.summary().name());
             folderPathLabel.setText(snapshot.summary().path());
             filesCountLabel.setText(Long.toString(snapshot.summary().filesCount()));
             foldersCountLabel.setText(Long.toString(snapshot.summary().foldersCount()));
             filesTable.getItems().setAll(snapshot.files());
-            statusLabel.setText("Folder loaded");
-        } catch (RuntimeException exception) {
-            statusLabel.setText(exception.getMessage());
-        }
+            statusLabel.setText(status);
     }
 
     private void clearSummary() {
@@ -121,5 +184,9 @@ public class FileToolController {
         filesCountLabel.setText("0");
         foldersCountLabel.setText("0");
         statusLabel.setText("Select a folder to view its contents");
+        selectFolderButton.setText("Select");
+        goButton.setDisable(true);
+        originalCleanedButton.setSelected(false);
+        originalCleanedButton.setText("Original");
     }
 }

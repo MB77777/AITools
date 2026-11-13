@@ -1,0 +1,3 @@
+- Improve Tools form. 
+  - Name sorting order should be sorted first by directories, than files and alphabetically in each group
+  - Folder and file should be distinguished by icon

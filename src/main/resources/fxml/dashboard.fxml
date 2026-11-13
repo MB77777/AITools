@@ -18,7 +18,7 @@
         <VBox prefWidth="210" spacing="12" styleClass="sidebar">
             <padding><Insets bottom="16" left="16" right="16" top="24" /></padding>
             <Label styleClass="brand" text="AITools" />
-            <Label styleClass="app-version" text="Version: 0.0.12" />
+            <Label styleClass="app-version" text="Version: 0.0.14" />
             <Separator />
             <Button maxWidth="Infinity" onAction="#showDashboard" text="Dashboard" />
             <Button maxWidth="Infinity" onAction="#showTools" text="Tools" />

@@ -1,0 +1,11 @@
+- Improve Tools form. 
+  - In the bottom part of the summary section add 2 buttons with the same size
+    - Go (anchored to the left)
+    - Original/Cleaned - button that changes label. Available only when the copy checkbox is on
+      - Label: Original means it shows content of the original directory
+      - Label: Cleaned means it shows content of the cleaned (done) directory
+  - Directory content should contain subdirectories as well.
+  - Selected folder path should be bold. 
+  - There should be button for selecting this folder similar to the button for selecting Rules.
+    - The only difference should be that label should change from "Select' when nothing is selected
+      to Change when there is a selected folder
