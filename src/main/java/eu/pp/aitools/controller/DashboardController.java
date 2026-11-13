@@ -38,6 +38,7 @@ public class DashboardController {
 
     @FXML
     private void initialize() {
+        toolsService.setFileToolNavigator(this::showFileTool);
         showDashboard();
     }
 

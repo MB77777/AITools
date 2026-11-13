@@ -7,13 +7,18 @@ import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
 
 @Component
@@ -27,6 +32,10 @@ public class FileToolController {
     @FXML private Label filesCountLabel;
     @FXML private Label foldersCountLabel;
     @FXML private Label statusLabel;
+    @FXML private TextField rulesFileField;
+    @FXML private CheckBox makeCopyCheckBox;
+    @FXML private TextField outputFolderField;
+    @FXML private Button outputFolderButton;
     @FXML private TableView<FileEntry> filesTable;
     @FXML private TableColumn<FileEntry, String> nameColumn;
     @FXML private TableColumn<FileEntry, String> modifiedColumn;
@@ -42,7 +51,43 @@ public class FileToolController {
         modifiedColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(
                 cell.getValue().modifiedAt().format(DATE_FORMAT)));
         sizeColumn.setCellValueFactory(cell -> new ReadOnlyLongWrapper(cell.getValue().size()));
+        outputFolderField.setText(Paths.get(System.getProperty("user.dir"), "done").toString());
+        updateOutputFolderVisibility();
         clearSummary();
+    }
+
+    @FXML
+    private void browseRulesFile() {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Select sorting rules file");
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Markdown files (*.md)", "*.md"));
+        java.io.File selectedFile = chooser.showOpenDialog(filesTable.getScene().getWindow());
+        if (selectedFile != null) {
+            rulesFileField.setText(selectedFile.toPath().toAbsolutePath().normalize().toString());
+        }
+    }
+
+    @FXML
+    private void toggleMakeCopy() {
+        updateOutputFolderVisibility();
+    }
+
+    @FXML
+    private void browseOutputFolder() {
+        DirectoryChooser chooser = new DirectoryChooser();
+        chooser.setTitle("Select output folder");
+        java.io.File selectedFolder = chooser.showDialog(filesTable.getScene().getWindow());
+        if (selectedFolder != null) {
+            outputFolderField.setText(selectedFolder.toPath().toAbsolutePath().normalize().toString());
+        }
+    }
+
+    private void updateOutputFolderVisibility() {
+        boolean visible = makeCopyCheckBox.isSelected();
+        outputFolderField.setVisible(visible);
+        outputFolderField.setManaged(visible);
+        outputFolderButton.setVisible(visible);
+        outputFolderButton.setManaged(visible);
     }
 
     @FXML

@@ -19,4 +19,9 @@ public class ToolsViewController {
     private void initialize() {
         descriptionLabel.setText(toolsService.description());
     }
+
+    @FXML
+    private void openFileTool() {
+        toolsService.openFileTool();
+    }
 }

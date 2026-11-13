@@ -48,3 +48,7 @@
     -fx-font-size: 17px;
     -fx-font-weight: bold;
 }
+
+.tool-tile {
+    -fx-padding: 16;
+}

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <VBox spacing="14" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.pp.aitools.controller.FileToolController">
@@ -28,6 +30,17 @@
             </VBox>
         </HBox>
         <Label fx:id="folderPathLabel" text="-" wrapText="true" />
+        <HBox alignment="CENTER_LEFT" spacing="8">
+            <Label text="Rules (.md)" />
+            <TextField fx:id="rulesFileField" editable="false" promptText="Select a Markdown rules file" HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#browseRulesFile" text="Browse" />
+        </HBox>
+        <CheckBox fx:id="makeCopyCheckBox" mnemonicParsing="false" onAction="#toggleMakeCopy" text="Make copy" />
+        <HBox alignment="CENTER_LEFT" spacing="8">
+            <Label text="Output folder" />
+            <TextField fx:id="outputFolderField" editable="false" HBox.hgrow="ALWAYS" />
+            <Button fx:id="outputFolderButton" mnemonicParsing="false" onAction="#browseOutputFolder" text="Browse" />
+        </HBox>
     </VBox>
     <Label fx:id="statusLabel" text="Select a folder to view its contents" />
     <TableView fx:id="filesTable" VBox.vgrow="ALWAYS">
