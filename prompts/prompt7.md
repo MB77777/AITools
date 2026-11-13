@@ -1,0 +1,11 @@
+- Add "Test Tools" form
+- Add button for this tool as well in the left menu as the tile at the Tools form
+- This form should have it's seperate service and controller
+- It should have two multiline text fields 100% width
+  - 1 for my prompts (20% of form height - fixed)
+  - 2 for LLM answers. (80% of form height - sizeable)
+- User test_icon for this tool
+- Controller should have this answer text field attached to the Flux<String> variable
+  which will be constantly updated.
+- There should be button Send for sending prompt to LLM
+- After sending prompt field should be cleared
