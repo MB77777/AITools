@@ -9,10 +9,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
@@ -29,7 +32,7 @@ public class FileToolController {
     private final FileToolService fileToolService;
 
     @FXML private Label folderNameLabel;
-    @FXML private Label folderPathLabel;
+    @FXML private TextField folderPathField;
     @FXML private Label filesCountLabel;
     @FXML private Label foldersCountLabel;
     @FXML private Label statusLabel;
@@ -54,8 +57,21 @@ public class FileToolController {
 
     @FXML
     private void initialize() {
-        nameColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(
-                cell.getValue().directory() ? cell.getValue().name() + "/" : cell.getValue().name()));
+        nameColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(cell.getValue().name()));
+        nameColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String name, boolean empty) {
+                super.updateItem(name, empty);
+                if (empty || name == null) {
+                    setText(null);
+                    setGraphic(null);
+                    return;
+                }
+                FileEntry entry = getTableView().getItems().get(getIndex());
+                setText(entry.directory() ? name + "/" : name);
+                setGraphic(new ImageView(entryIcon(entry)));
+            }
+        });
         modifiedColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(
                 cell.getValue().modifiedAt().format(DATE_FORMAT)));
         sizeColumn.setCellValueFactory(cell -> new ReadOnlyLongWrapper(cell.getValue().size()));
@@ -171,7 +187,7 @@ public class FileToolController {
 
     private void showSnapshot(DirectorySnapshot snapshot, String status) {
             folderNameLabel.setText(snapshot.summary().name());
-            folderPathLabel.setText(snapshot.summary().path());
+            folderPathField.setText(snapshot.summary().path());
             filesCountLabel.setText(Long.toString(snapshot.summary().filesCount()));
             foldersCountLabel.setText(Long.toString(snapshot.summary().foldersCount()));
             filesTable.getItems().setAll(snapshot.files());
@@ -180,7 +196,7 @@ public class FileToolController {
 
     private void clearSummary() {
         folderNameLabel.setText("No folder selected");
-        folderPathLabel.setText("-");
+        folderPathField.setText("");
         filesCountLabel.setText("0");
         foldersCountLabel.setText("0");
         statusLabel.setText("Select a folder to view its contents");
@@ -188,5 +204,21 @@ public class FileToolController {
         goButton.setDisable(true);
         originalCleanedButton.setSelected(false);
         originalCleanedButton.setText("Original");
+    }
+
+    private Image entryIcon(FileEntry entry) {
+        String resource = entry.directory()
+                ? "/image/folders/folder.png"
+                : "/image/files/" + fileExtension(entry.name()) + ".png";
+        var resourceUrl = getClass().getResource(resource);
+        if (resourceUrl == null) {
+            resourceUrl = getClass().getResource("/image/files/txt.png");
+        }
+        return new Image(resourceUrl.toExternalForm(), 16, 16, true, true);
+    }
+
+    private String fileExtension(String name) {
+        int dot = name.lastIndexOf('.');
+        return dot > 0 && dot < name.length() - 1 ? name.substring(dot + 1).toLowerCase() : "txt";
     }
 }

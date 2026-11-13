@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <VBox spacing="14" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.pp.aitools.controller.FileToolController">
     <padding><Insets bottom="24" left="30" right="30" top="24" /></padding>
@@ -31,7 +32,7 @@
         </HBox>
         <HBox alignment="CENTER_LEFT" spacing="8">
             <Label text="Folder" />
-            <Label fx:id="folderPathLabel" styleClass="selected-path" text="-" wrapText="true" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="folderPathField" editable="false" styleClass="selected-path" promptText="Select a folder" HBox.hgrow="ALWAYS" />
             <Button fx:id="selectFolderButton" mnemonicParsing="false" onAction="#browseFolder" text="Select" />
         </HBox>
         <HBox alignment="CENTER_LEFT" spacing="8">
@@ -47,6 +48,7 @@
         </HBox>
         <HBox alignment="CENTER_LEFT" spacing="8">
             <Button fx:id="goButton" mnemonicParsing="false" onAction="#go" prefWidth="100" text="Go" />
+            <Region HBox.hgrow="ALWAYS" />
             <ToggleButton fx:id="originalCleanedButton" mnemonicParsing="false" onAction="#toggleOriginalCleaned" prefWidth="100" text="Original" visible="false" managed="false" />
         </HBox>
     </VBox>

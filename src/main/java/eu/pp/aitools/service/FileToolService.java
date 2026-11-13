@@ -27,7 +27,10 @@ public class FileToolService {
         }
 
         try (Stream<Path> entries = Files.list(directory)) {
-            List<Path> children = entries.sorted(Comparator.comparing(path -> path.getFileName().toString(), String.CASE_INSENSITIVE_ORDER)).toList();
+            List<Path> children = entries.sorted(Comparator
+                    .comparing((Path path) -> !Files.isDirectory(path))
+                    .thenComparing(path -> path.getFileName().toString(), String.CASE_INSENSITIVE_ORDER))
+                    .toList();
             long filesCount = children.stream().filter(Files::isRegularFile).count();
             long foldersCount = children.stream().filter(Files::isDirectory).count();
             List<FileEntry> files = children.stream()
