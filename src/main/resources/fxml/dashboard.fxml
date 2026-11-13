@@ -18,11 +18,12 @@
         <VBox prefWidth="210" spacing="12" styleClass="sidebar">
             <padding><Insets bottom="16" left="16" right="16" top="24" /></padding>
             <Label styleClass="brand" text="AITools" />
-            <Label styleClass="app-version" text="Version: 0.0.15" />
+            <Label styleClass="app-version" text="Version: 0.0.16" />
             <Separator />
             <Button maxWidth="Infinity" onAction="#showDashboard" text="Dashboard" />
             <Button maxWidth="Infinity" onAction="#showTools" text="Tools" />
             <Button maxWidth="Infinity" onAction="#showFileTool" text="File Tool" />
+            <Button maxWidth="Infinity" onAction="#showTestTools" text="Test Tools" />
             <Button maxWidth="Infinity" onAction="#showSettings" text="Settings" />
             <Region VBox.vgrow="ALWAYS" />
             <ToggleButton fx:id="themeToggle" maxWidth="Infinity" onAction="#toggleTheme" text="Dark theme" />
@@ -42,6 +43,7 @@
                 <fx:include fx:id="dashboardView" source="dashboard-view.fxml" />
                 <fx:include fx:id="toolsView" source="tools-view.fxml" />
                 <fx:include fx:id="fileToolView" source="file-tool-view.fxml" />
+                <fx:include fx:id="testToolsView" source="test-tools-view.fxml" />
                 <fx:include fx:id="settingsView" source="settings-view.fxml" />
             </StackPane>
         </VBox>

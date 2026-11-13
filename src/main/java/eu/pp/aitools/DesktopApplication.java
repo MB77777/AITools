@@ -12,7 +12,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 public class DesktopApplication extends Application {
-    private static final String APPLICATION_VERSION = "0.0.15";
+    private static final String APPLICATION_VERSION = "0.0.16";
     private ConfigurableApplicationContext context;
 
     @Override

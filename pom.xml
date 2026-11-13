@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>eu.pp</groupId>
     <artifactId>AITools</artifactId>
-    <version>0.0.15</version>
+    <version>0.0.16</version>
     <name>AITools</name>
 
     <parent>
@@ -49,6 +49,10 @@
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
             <version>${controlsfx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
